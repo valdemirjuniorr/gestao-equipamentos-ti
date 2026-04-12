@@ -5,8 +5,11 @@ const equipamentoController = require("../controllers/equipamentoController")
 const WithAuth = require("../middleware/auth")
 
 router.get("/", WithAuth, equipamentoController.getEquipamentos)
-router.post("/", equipamentoController.createEquipamento)
-router.delete("/:id", equipamentoController.deleteEquipamento)
-router.put("/:id", equipamentoController.updateEquipamento)
+
+router.post("/", WithAuth, equipamentoController.createEquipamento)
+
+router.delete("/:id", WithAuth, equipamentoController.deleteEquipamento)
+
+router.put("/:id", WithAuth, equipamentoController.updateEquipamento)
 
 module.exports = router

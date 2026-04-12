@@ -1,20 +1,15 @@
 const express = require("express")
-
 const router = express.Router()
 
-const {
-    getLocais,
-    createLocal,
-    deleteLocal,
-    updateLocal
-} = require("../controllers/localController")
+const localController = require("../controllers/localController")
+const WithAuth = require("../middleware/auth")
 
-router.get("/", getLocais)
+router.get("/", WithAuth, localController.getLocais)
 
-router.post("/", createLocal)
+router.post("/", WithAuth, localController.createLocal)
 
-router.delete("/:id", deleteLocal)
+router.delete("/:id", WithAuth, localController.deleteLocal)
 
-router.put("/:id", updateLocal)
+router.put("/:id", WithAuth, localController.updateLocal)
 
 module.exports = router

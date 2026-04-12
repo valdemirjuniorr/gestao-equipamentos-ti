@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
+const bcrypt = require("bcrypt")
 
-const user = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     nome: {
         type: String,
         required: true
@@ -16,4 +17,29 @@ const user = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("User", user)
+userSchema.pre("save", function (next) {
+    if (this.isNew || this.isModified("senha")) {
+        bcrypt.hash(this.senha, 10, (err, hashedPassword) => {
+            if (err) {
+                return next(err)
+            }
+
+            this.senha = hashedPassword
+            next()
+        })
+    } else {
+        next()
+    }
+})
+
+userSchema.methods.isCorrectPassword = function (senhaDigitada, callback) {
+    bcrypt.compare(senhaDigitada, this.senha, (err, same) => {
+        if (err) {
+            return callback(err)
+        }
+
+        callback(null, same)
+    })
+}
+
+module.exports = mongoose.model("User", userSchema)

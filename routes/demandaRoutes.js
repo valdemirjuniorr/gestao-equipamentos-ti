@@ -9,12 +9,14 @@ const {
     updateDemanda
 } = require("../controllers/demandaController")
 
-router.get("/", getDemandas)
+const WithAuth = require("../middleware/auth")
 
-router.post("/", createDemanda)
+router.get("/", WithAuth, getDemandas)
 
-router.delete("/:id", deleteDemanda)
+router.post("/", WithAuth, createDemanda)
 
-router.put("/:id", updateDemanda)
+router.delete("/:id", WithAuth, deleteDemanda)
+
+router.put("/:id", WithAuth, updateDemanda)
 
 module.exports = router

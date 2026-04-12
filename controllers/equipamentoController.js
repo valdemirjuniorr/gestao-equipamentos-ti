@@ -1,6 +1,6 @@
 const Equipamento = require("../models/Equipamento")
 
-// LISTAR TODOS OS EQUIPAMENTOS
+
 const getEquipamentos = async (req, res) => {
 
     try {
@@ -21,7 +21,7 @@ const getEquipamentos = async (req, res) => {
 }
 
 
-// CRIAR NOVO EQUIPAMENTO
+
 const createEquipamento = async (req, res) => {
 
     try {
@@ -62,7 +62,7 @@ const createEquipamento = async (req, res) => {
 }
 
 
-// DELETAR EQUIPAMENTO
+
 const deleteEquipamento = async (req, res) => {
 
     try {
@@ -87,7 +87,7 @@ const deleteEquipamento = async (req, res) => {
 }
 
 
-// ATUALIZAR EQUIPAMENTO
+
 const updateEquipamento = async (req, res) => {
 
     try {
